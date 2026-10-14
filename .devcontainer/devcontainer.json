@@ -1,0 +1,39 @@
+{
+  "name": "Mi asistente con IA",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bookworm",
+  "hostRequirements": {
+    "cpus": 2
+  },
+  "forwardPorts": [
+    3000
+  ],
+  "postCreateCommand": "npm install -g vercel @anthropic-ai/claude-code && ([ -f package.json ] && npm install || true)",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "ms-vsliveshare.vsliveshare"
+      ]
+    }
+  },
+  "containerEnv": {
+    "ANTHROPIC_MODEL": "claude-haiku-5-5"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.12"
+    }
+  },
+  "portsAttributes": {
+    "3000": {
+      "label": "Mi asistente (npm run dev)",
+      "onAutoForward": "notify"
+    }
+  },
+  "secrets": {
+    "ANTHROPIC_API_KEY": {
+      "description": "Clave de API que le entrega el instructor (tiene saldo y tiempo limitados). No la escriba en ningún archivo."
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "descripcion": "Glosario de expansión de consulta: si el cliente usa la palabra de la izquierda, se agregan las palabras de la derecha a la búsqueda. Es el arreglo manual al problema de vocabulario (taller 3). Amplíelo con las palabras reales de sus clientes.",
+  "expansiones": {
+    "operar": ["cirugía", "programada", "autorización"],
+    "operarme": ["cirugía", "programada", "autorización"],
+    "operación": ["cirugía", "programada", "autorización"],
+    "diabetes": ["preexistencias", "enfermedad", "carencia"],
+    "asma": ["preexistencias", "enfermedad", "carencia"],
+    "hipertensión": ["preexistencias", "enfermedad", "carencia"],
+    "choco": ["siniestro", "auto", "deducible"],
+    "choque": ["siniestro", "auto", "deducible"],
+    "humedad": ["filtración", "daño por agua"],
+    "devuelven": ["devolución", "cobro duplicado"]
+  }
+}
