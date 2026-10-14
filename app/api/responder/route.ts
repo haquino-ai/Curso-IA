@@ -91,11 +91,37 @@ export async function POST(req: Request) {
 
   const bloque = msg.content.find((b) => b.type === "tool_use");
   if (!bloque || bloque.type !== "tool_use") return Response.json({ error: "salida_invalida" }, { status: 502 });
+  const datos = bloque.input as { suficiente_contexto: boolean };
+  const documentos = [...new Set(encontrados.map((r) => r.fragmento.doc))];
+  // Los pasos que se muestran en la pantalla para explicar cómo se llegó a la respuesta.
+  const pasos = [
+    {
+      quien: "IA",
+      titulo: "Reescribir la pregunta",
+      detalle: reescrita === pregunta ? "No la cambió; se usó su pregunta original." : `Cambió su pregunta a: "${reescrita}". Solo sirve para buscar; la respuesta usa su pregunta original.`,
+    },
+    {
+      quien: "Programa",
+      titulo: "Buscar en los documentos",
+      detalle: `Eligió ${encontrados.length} fragmentos de ${documentos.length} documento(s) comparando palabras. Los documentos obsoletos quedan fuera.`,
+    },
+    {
+      quien: "IA",
+      titulo: "Redactar la respuesta",
+      detalle: datos.suficiente_contexto ? "Leyó los fragmentos y redactó la respuesta con sus fuentes." : "Leyó los fragmentos y dijo que no tenía información suficiente.",
+    },
+    {
+      quien: "Programa",
+      titulo: "Mostrar en pantalla",
+      detalle: "Mostró la respuesta, la fuente y los fragmentos que vio el asistente.",
+    },
+  ];
   return Response.json({
     ...(bloque.input as object),
     pregunta_original: pregunta,
     pregunta_reescrita: reescrita,
-    contexto_usado: encontrados.map((r) => r.fragmento.doc),
+    pasos,
+    contexto_usado: documentos,
     // Lo que el asistente vio, para el botón "Ver lo que vio el asistente" de la pantalla.
     fragmentos: encontrados.map((r) => ({ documento: r.fragmento.doc, seccion: r.fragmento.titulo, texto: r.fragmento.texto })),
   });
