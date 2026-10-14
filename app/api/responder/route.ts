@@ -3,6 +3,7 @@
 // La clave ANTHROPIC_API_KEY vive solo en variables de entorno del servidor.
 import Anthropic from "@anthropic-ai/sdk";
 import { SYSTEM } from "@/prompts/responder.system";
+import { SYSTEM_REESCRIBIR } from "@/prompts/reescribir.system";
 import { buscar, expandir, formatear } from "@/lib/retrieval";
 
 const client = new Anthropic(); // lee ANTHROPIC_API_KEY del entorno
@@ -28,6 +29,23 @@ const RESPUESTA_TOOL: Anthropic.Tool = {
   },
 };
 
+// Si la reescritura falla o sale rara, se busca con la pregunta original: la respuesta nunca se rompe por esto.
+async function reescribir(pregunta: string): Promise<string> {
+  try {
+    const msg = await client.messages.create({
+      model: MODEL,
+      max_tokens: 60,
+      system: SYSTEM_REESCRIBIR,
+      messages: [{ role: "user", content: `<pregunta>\n${pregunta}\n</pregunta>` }],
+    });
+    const bloque = msg.content.find((b) => b.type === "text");
+    const texto = bloque?.type === "text" ? bloque.text.trim() : "";
+    return texto && texto.length <= 200 ? texto : pregunta;
+  } catch {
+    return pregunta;
+  }
+}
+
 // Rate limit ingenuo en memoria (válido para el taller; en producción use un almacén compartido).
 const hits = new Map<string, number[]>();
 function limitado(ip: string, max = 10, ventanaMs = 60_000) {
@@ -47,7 +65,8 @@ export async function POST(req: Request) {
     return Response.json({ error: "input_invalido" }, { status: 400 });
 
   // 1. Recuperar: el CÓDIGO decide qué entra al contexto (nunca el usuario). Los documentos obsoletos se excluyen aquí.
-  const encontrados = buscar(expandir(pregunta), K);
+  const reescrita = await reescribir(pregunta);
+  const encontrados = buscar(expandir(reescrita), K);
   const contexto = formatear(encontrados);
 
   // 2. Responder con ese contexto.
@@ -74,6 +93,8 @@ export async function POST(req: Request) {
   if (!bloque || bloque.type !== "tool_use") return Response.json({ error: "salida_invalida" }, { status: 502 });
   return Response.json({
     ...(bloque.input as object),
+    pregunta_original: pregunta,
+    pregunta_reescrita: reescrita,
     contexto_usado: encontrados.map((r) => r.fragmento.doc),
     // Lo que el asistente vio, para el botón "Ver lo que vio el asistente" de la pantalla.
     fragmentos: encontrados.map((r) => ({ documento: r.fragmento.doc, seccion: r.fragmento.titulo, texto: r.fragmento.texto })),

@@ -230,5 +230,109 @@
     "estado": "OBSOLETO",
     "titulo": "Horario de atención",
     "texto": "Lunes a viernes de 9:00 a 18:00."
+  },
+  {
+    "doc": "CLI-COBERTURA-OPER",
+    "version": "1.0",
+    "vigente_desde": "2026-01-01",
+    "estado": "VIGENTE",
+    "titulo": "Copago en operaciones",
+    "texto": "El paciente paga un copago del 20% del costo de la operación, con un máximo de USD 400 por cirugía. La clínica cubre el resto con el plan Esencial."
+  },
+  {
+    "doc": "CLI-COBERTURA-OPER",
+    "version": "1.0",
+    "vigente_desde": "2026-01-01",
+    "estado": "VIGENTE",
+    "titulo": "Plan Premium",
+    "texto": "Con el plan Premium el copago baja al 10%, con un máximo de USD 250 por cirugía."
+  },
+  {
+    "doc": "CLI-COBERTURA-OPER",
+    "version": "1.0",
+    "vigente_desde": "2026-01-01",
+    "estado": "VIGENTE",
+    "titulo": "Cirugías de urgencia",
+    "texto": "Las operaciones de urgencia no requieren autorización previa. Se deben informar dentro de 24 horas desde el ingreso."
+  },
+  {
+    "doc": "CLI-COBERTURA-OPER",
+    "version": "1.0",
+    "vigente_desde": "2026-01-01",
+    "estado": "VIGENTE",
+    "titulo": "Operaciones programadas",
+    "texto": "Las cirugías programadas necesitan autorización previa. Hay que pedirla con al menos 15 días hábiles de anticipación."
+  },
+  {
+    "doc": "CLI-COBERTURA-OPER",
+    "version": "1.0",
+    "vigente_desde": "2026-01-01",
+    "estado": "VIGENTE",
+    "titulo": "Exclusiones",
+    "texto": "No cubren cirugías estéticas sin indicación médica ni tratamientos realizados en el extranjero."
+  },
+  {
+    "doc": "CLI-TURNOS",
+    "version": "1.0",
+    "vigente_desde": "2026-01-01",
+    "estado": "VIGENTE",
+    "titulo": "Reprogramación de atención",
+    "texto": "Una atención puede reprogramarse sin costo hasta 48 horas antes de la hora asignada, por el portal de pacientes o llamando a la central."
+  },
+  {
+    "doc": "CLI-TURNOS",
+    "version": "1.0",
+    "vigente_desde": "2026-01-01",
+    "estado": "VIGENTE",
+    "titulo": "Anulación de turno",
+    "texto": "Si el turno se anula con menos de 24 horas de anticipación, se cobra un cargo de USD 15."
+  },
+  {
+    "doc": "CLI-TURNOS",
+    "version": "1.0",
+    "vigente_desde": "2026-01-01",
+    "estado": "VIGENTE",
+    "titulo": "Límite de reprogramaciones",
+    "texto": "Cada turno puede reprogramarse hasta 2 veces. Una tercera solicitud requiere hablar con un coordinador."
+  },
+  {
+    "doc": "CLI-TURNOS",
+    "version": "1.0",
+    "vigente_desde": "2026-01-01",
+    "estado": "VIGENTE",
+    "titulo": "Ausencias sin aviso",
+    "texto": "Dos ausencias sin aviso en 12 meses suspenden la reserva de turnos en línea por 30 días."
+  },
+  {
+    "doc": "CLI-PAGOS",
+    "version": "1.0",
+    "vigente_desde": "2026-01-01",
+    "estado": "VIGENTE",
+    "titulo": "Medios de cancelación",
+    "texto": "Se aceptan tarjetas de crédito y débito, transferencias y efectivo. No se aceptan cheques personales."
+  },
+  {
+    "doc": "CLI-PAGOS",
+    "version": "1.0",
+    "vigente_desde": "2026-01-01",
+    "estado": "VIGENTE",
+    "titulo": "Comprobante tributario",
+    "texto": "El comprobante tributario se emite el mismo día de la atención. Si el paciente lo pide después, tiene 30 días para solicitarlo en caja."
+  },
+  {
+    "doc": "CLI-PAGOS",
+    "version": "1.0",
+    "vigente_desde": "2026-01-01",
+    "estado": "VIGENTE",
+    "titulo": "Pagos en cuotas",
+    "texto": "Montos mayores a USD 300 pueden pagarse en hasta 6 cuotas sin interés, con tarjetas de bancos asociados."
+  },
+  {
+    "doc": "CLI-PAGOS",
+    "version": "1.0",
+    "vigente_desde": "2026-01-01",
+    "estado": "VIGENTE",
+    "titulo": "Reembolsos",
+    "texto": "Los reembolsos se procesan en un plazo de 15 días hábiles desde que el paciente entrega los documentos completos."
   }
 ]

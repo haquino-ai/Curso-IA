@@ -8,6 +8,8 @@ type Respuesta = {
   fuentes: string[];
   suficiente_contexto: boolean;
   alerta_inyeccion: boolean;
+  pregunta_original?: string;
+  pregunta_reescrita?: string;
   contexto_usado?: string[];
   fragmentos?: { documento: string; seccion: string; texto: string }[];
   error?: string;
@@ -97,6 +99,11 @@ export default function Pagina() {
 
       {resultado && (
         <section style={{ padding: 18, borderRadius: 10, background: "#faf8f3", border: "1px solid #e6e1d3" }}>
+          {resultado.pregunta_reescrita && (
+            <p style={{ margin: "0 0 10px", fontSize: 13, color: "#6b6785" }}>
+              Su pregunta: &quot;{resultado.pregunta_original}&quot; · Buscada como: &quot;{resultado.pregunta_reescrita}&quot;
+            </p>
+          )}
           <p style={{ fontSize: 18, marginTop: 0 }}>{resultado.respuesta}</p>
           <p style={{ margin: "6px 0" }}>
             <strong>Fuente:</strong> {resultado.fuentes.length ? resultado.fuentes.join(", ") : "ninguna"}
