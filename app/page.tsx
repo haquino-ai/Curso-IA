@@ -61,6 +61,8 @@ export default function Pagina() {
       <h1 style={{ fontSize: 28, marginBottom: 4 }}>Mi asistente</h1>
       <p style={{ color: "#6b6785", marginTop: 0 }}>Escriba una pregunta. El asistente responde con los documentos de la carpeta <code>context</code> y dice de dónde salió el dato.</p>
 
+      <div style={{ display: "flex", gap: 20, alignItems: "flex-start", flexWrap: "wrap" }}>
+      <div style={{ flex: "1 1 360px", minWidth: 0 }}>
       <textarea
         value={pregunta}
         onChange={(e) => setPregunta(e.target.value)}
@@ -87,8 +89,11 @@ export default function Pagina() {
           </button>
         ))}
       </div>
+      </div>
+      <img src="/robot.svg" alt="Robot asistente" style={{ width: 140, height: "auto" }} />
+      </div>
 
-      {fallo && <div style={{ padding: 14, borderRadius: 8, background: "#ffe3da" }}>{fallo}</div>}
+      {fallo &&<div style={{ padding: 14, borderRadius: 8, background: "#ffe3da" }}>{fallo}</div>}
 
       {resultado && (
         <section style={{ padding: 18, borderRadius: 10, background: "#faf8f3", border: "1px solid #e6e1d3" }}>
